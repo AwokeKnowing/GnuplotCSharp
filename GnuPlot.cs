@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace AwokeKnowing.GnuplotCSharp
 {
@@ -147,6 +146,8 @@ namespace AwokeKnowing.GnuplotCSharp
             ExtPro.CloseMainWindow();
         }
 
+
+       
     }
 
     enum PointStyles
@@ -198,6 +199,9 @@ namespace AwokeKnowing.GnuplotCSharp
             Y = y;
             Options = options;
         }
+
+
+        
     }
         
     
