@@ -39,10 +39,9 @@ namespace AwokeKnowing.GnuplotCSharp
             GnupStWr.Flush();
         }
 
-        public static bool SaveData(double[] X,double[] Y, string filename)
+        public static bool SaveData(double[] X,double[] Y, string path="",string filename="temp.data")
         { 
-            string tempPath = System.IO.Path.GetTempPath();
-            StreamWriter data = new StreamWriter(tempPath + filename,false);
+            StreamWriter data = new StreamWriter(path + filename,false);
             int m = Math.Min(X.Length, Y.Length);
             for(int i =0;i<m;i++)
                 data.WriteLine(X[i].ToString()+ " " + Y[i].ToString());
@@ -61,7 +60,7 @@ namespace AwokeKnowing.GnuplotCSharp
             else
             {
                 path = path.Replace(@"\", @"\\");
-                GnupStWr.WriteLine(@"plot """ +path +@""" " + options);
+                GnupStWr.WriteLine(@"plot """ +path+filename +@""" " + options);
                 GnupStWr.Flush();
             }
             

@@ -26,6 +26,11 @@ class Demo
         GnuPlot.Plot(X, Y);
         Thread.Sleep(2000);
 
+        string tempfolder=System.IO.Path.GetTempPath();
+        GnuPlot.SaveData(X, Y, tempfolder, "plot1.data");
+        GnuPlot.Plot(tempfolder, "plot1.data", "with linespoints pt " + (int)PointStyles.SolidDiamond);
+        Thread.Sleep(2000);
+
         GnuPlot.HoldOn();
         GnuPlot.WriteLine("set xrange [-25:40]");
         GnuPlot.WriteLine("set yrange [-15:15]");
