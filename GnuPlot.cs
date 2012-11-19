@@ -11,6 +11,7 @@ namespace AwokeKnowing.GnuplotCSharp
         private static Process ExtPro;
         private static StreamWriter GnupStWr;
         private static List<StoredPlot> PlotBuffer;
+        private static List<StoredPlot> SPlotBuffer;
 
         public static bool Hold { get; private set; }
         
@@ -24,6 +25,7 @@ namespace AwokeKnowing.GnuplotCSharp
             ExtPro.Start();
             GnupStWr = ExtPro.StandardInput;
             PlotBuffer = new List<StoredPlot>();
+            SPlotBuffer = new List<StoredPlot>();
         }
 
         public static void WriteLine(string gnuplotcommands)
@@ -37,6 +39,16 @@ namespace AwokeKnowing.GnuplotCSharp
         {
             GnupStWr.Write(gnuplotcommands);
             GnupStWr.Flush();
+        }
+
+        public static void Set(string options)
+        {
+            GnupStWr.WriteLine("set "+options);
+        }
+
+        public static void Unset(string options)
+        {
+            GnupStWr.WriteLine("unset " + options);
         }
 
         public static bool SaveData(double[] X,double[] Y, string path="",string filename="temp.data")
@@ -100,6 +112,29 @@ namespace AwokeKnowing.GnuplotCSharp
                 
         }
 
+        public static void SPlot(int sizeX, int sizeY,double[] z, string options="with lines")
+        {
+            if (Hold)
+            {
+                SPlotBuffer.Add(new StoredPlot(sizeX, sizeY, z, options));
+                SPlot(SPlotBuffer);
+                //http://gnuplot-tricks.blogspot.com/2009/07/maps-contour-plots-with-labels.html
+            }
+            else
+            {
+                GnupStWr.WriteLine(@"splot ""-"" " + options);
+                int i = 0;
+                for (int x = 0; x < sizeX; x++)
+                {
+                    for (int y = 0; y < sizeY; y++, i++)
+                        GnupStWr.WriteLine(z[i]);
+                    GnupStWr.WriteLine();
+                }
+                GnupStWr.WriteLine("e");
+                GnupStWr.Flush();
+            }
+        }
+
         public static void Plot(List<StoredPlot> storedPlots)
         {
             var plot = "plot ";
@@ -129,6 +164,52 @@ namespace AwokeKnowing.GnuplotCSharp
             GnupStWr.Flush();
         }
 
+        public static void SPlot(List<StoredPlot> storedPlots)
+        {
+
+            var splot = "splot ";
+            for (int i = 0; i < storedPlots.Count; i++)
+            {
+                if (storedPlots[i].File != "")
+                    GnupStWr.Write(splot + storedPlots[i].File + " " + storedPlots[i].Options);
+                if (storedPlots[i].Formula != "")
+                    GnupStWr.Write(splot + storedPlots[i].Formula + " " + storedPlots[i].Options);
+                if (storedPlots[i].YSize != null && storedPlots[i].XSize !=null && storedPlots[i].Z.Length > 0)
+                    GnupStWr.Write(splot + @"""-"" " + storedPlots[i].Options);
+                if (storedPlots[i].Y !=null && storedPlots[i].X.Length > 0 && storedPlots[i].Y.Length > 0 && storedPlots[i].Z.Length > 0)
+                    GnupStWr.Write(splot + @"""-"" " + storedPlots[i].Options);
+                if (i == 0) splot = ",";
+            }
+            GnupStWr.WriteLine("");
+
+            for (int i = 0; i < storedPlots.Count; i++)
+            {
+                if (storedPlots[i].YSize != null && storedPlots[i].XSize != null && storedPlots[i].Z.Length > 0)
+                {
+                    int sizeX = (int)storedPlots[i].XSize;
+                    int sizeY = (int)storedPlots[i].YSize;
+                    
+                    int zi = 0;
+                    for (int x = 0; x < sizeX; x++)
+                    {
+                        for (int y = 0; y < sizeY; y++, zi++)
+                            GnupStWr.WriteLine(storedPlots[i].Z[zi]);
+                        GnupStWr.WriteLine();
+                    }
+                    GnupStWr.WriteLine("e");
+                    GnupStWr.Flush();
+                }
+
+                if (storedPlots[i].Y != null && storedPlots[i].X.Length > 0 && storedPlots[i].Y.Length > 0 && storedPlots[i].Z.Length > 0)
+                {
+                    int m = storedPlots[i].Y.Length;
+                    for (int di = 0; di < m; di++)
+                        GnupStWr.WriteLine(storedPlots[i].X[di] + " " + storedPlots[i].Y[di] + " " + storedPlots[i].Z[di]);
+                    GnupStWr.WriteLine("e");
+                }
+            }
+        }
+
         public static void HoldOn()
         {
             Hold = true;
@@ -138,6 +219,7 @@ namespace AwokeKnowing.GnuplotCSharp
         {
             Hold = false;
             PlotBuffer.Clear();
+            SPlotBuffer.Clear();
         }
 
         public static void Close()
@@ -173,6 +255,9 @@ namespace AwokeKnowing.GnuplotCSharp
         public string Formula = "";
         public double[] X;
         public double[] Y;
+        public double[] Z;
+        public int? XSize;
+        public int? YSize;
         public string Options;
 
         public StoredPlot()
@@ -196,6 +281,14 @@ namespace AwokeKnowing.GnuplotCSharp
         {
             X = x;
             Y = y;
+            Options = options;
+        }
+
+        public StoredPlot(int sizeX, int sizeY, double[] z,string options)
+        {
+            XSize = sizeX;
+            YSize = sizeY;
+            Z = z;
             Options = options;
         }
 

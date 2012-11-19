@@ -32,8 +32,8 @@ class Demo
         Thread.Sleep(2000);
 
         GnuPlot.HoldOn();
-        GnuPlot.WriteLine("set xrange [-25:40]");
-        GnuPlot.WriteLine("set yrange [-15:15]");
+        GnuPlot.Set("xrange [-25:40]");
+        GnuPlot.Set("yrange [-15:15]");
         var r = new Random();
         for (int i = 0; i < 14; i++)
         {
@@ -50,6 +50,28 @@ class Demo
             GnuPlot.Plot(Xr, Yr, "title 'point style "+i+"' pt " + i);
             Thread.Sleep(200);
         }
+        GnuPlot.HoldOff();
+        Thread.Sleep(3000);
+
+
+        //splot demos
+        double[] z = new double[31 * 31];
+        for (int x = 0; x < 31; x++)
+            for (int y = 0; y < 31; y++)
+                z[31 * x + y] = (x - 15) * (x - 15) + (y - 15) * (y - 15);
+        GnuPlot.Set("pm3d");
+        GnuPlot.Set("autoscale");
+        GnuPlot.Set("contour base");
+        GnuPlot.SPlot(31, 31, z);
+        Thread.Sleep(2000);
+
+        GnuPlot.HoldOn();
+        GnuPlot.Set("view map");
+        GnuPlot.Unset("surface");
+        GnuPlot.Set("cntrparam levels 10");
+        GnuPlot.Set("palette gray");
+        GnuPlot.SPlot(31, 31, z);
+        Thread.Sleep(2000);
 
         Console.WriteLine("End of demo");
         Console.ReadKey();
