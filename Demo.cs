@@ -27,8 +27,8 @@ class Demo
         Thread.Sleep(2000);
 
         string tempfolder=System.IO.Path.GetTempPath();
-        GnuPlot.SaveData(X, Y, tempfolder, "plot1.data");
-        GnuPlot.Plot(tempfolder, "plot1.data", "with linespoints pt " + (int)PointStyles.SolidDiamond);
+        GnuPlot.SaveData(X, Y, tempfolder+ "plot1.data");
+        GnuPlot.Plot(tempfolder+ "plot1.data", "with linespoints pt " + (int)PointStyles.SolidDiamond);
         Thread.Sleep(2000);
 
         GnuPlot.HoldOn();
@@ -62,7 +62,7 @@ class Demo
         GnuPlot.Set("pm3d");
         GnuPlot.Set("autoscale");
         GnuPlot.Set("contour base");
-        GnuPlot.SPlot(31, 31, z);
+        GnuPlot.SPlot(31,z);
         Thread.Sleep(2000);
 
         GnuPlot.HoldOn();
@@ -70,7 +70,7 @@ class Demo
         GnuPlot.Unset("surface");
         GnuPlot.Set("cntrparam levels 10");
         GnuPlot.Set("palette gray");
-        GnuPlot.SPlot(31, 31, z);
+        GnuPlot.SPlot(31, z);
         Thread.Sleep(2000);
 
         Console.WriteLine("End of demo");
