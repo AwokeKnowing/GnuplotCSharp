@@ -35,7 +35,7 @@ Plot a function
 GnuPlot.Plot("sin(x) + 2");
 ```
 Output
-![Plot a function](readmeimages/plotf.png "Optional title")
+![Plot a function](https://github.com/awokeknowing/readmeimages/plotf.png "Plot a function")
 
 Plot a function with custom color and line width (see gnuplot documentation)
 ```C#
