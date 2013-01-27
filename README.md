@@ -36,7 +36,7 @@ GnuPlot.Plot("sin(x) + 2");
 ```
 ![Plot a function](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/plotf.png)
 -------
-
+<br><br>
 
 
 Plot a function with custom color and line width (see gnuplot documentation)
