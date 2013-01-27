@@ -80,7 +80,20 @@ class Demo
 
 
         //GnuPlot.Plot("sin(x) + 2");
-        GnuPlot.Plot("sin(x) + 2", "lc rgb \"magenta\" lw 5");
+
+        //GnuPlot.Plot("sin(x) + 2", "lc rgb \"magenta\" lw 5");
+
+        //double[] Y = new double[] { -4, 6.5, -2, 3, -8, -5, 11, 4, -5, 10 };
+        //GnuPlot.Plot(Y);
+
+        //double[] X = new double[] { -10, -8.5, -2, 1, 6, 9, 10, 14, 15, 19 };
+        //double[] Y = new double[] { -4, 6.5, -2, 3, -8, -5, 11, 4, -5, 10 };
+        //GnuPlot.Plot(X, Y);
+
+        GnuPlot.HoldOn();
+        GnuPlot.Plot("cos(x) + x");
+        GnuPlot.Plot("cos(2*x)", "with points pt 3");
+
         Console.ReadKey();
 
     }

@@ -36,36 +36,38 @@ GnuPlot.Plot("sin(x) + 2");
 ```
 ![Plot a function](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/plotf.png)
 
+
 Plot a function with custom color and line width (see gnuplot documentation)
 ```C#
 GnuPlot.Plot("sin(x) + 2", "lc rgb \"magenta\" lw 5");
 ```
 ![Plot a function](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/plotf2.png)
 
+
 Plot an array of y values
 ```C#
 double[] Y = new double[] { -4, 6.5, -2, 3, -8, -5, 11, 4, -5, 10 };
 GnuPlot.Plot(Y);
 ```
-Output
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/plotY.png)
 
 
-Plot an array of x and y values
+Plot an array of x and y values  (notice the x values vs previous graph)
 ```C#
 double[] X = new double[] { -10, -8.5, -2, 1, 6, 9, 10, 14, 15, 19 };
 double[] Y = new double[] { -4, 6.5, -2, 3, -8, -5, 11, 4, -5, 10 };
 GnuPlot.Plot(X, Y);
 ```
-Output
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/plotXY.png)
 
 
-Overlay multiple graphs
+Overlay multiple graphs  (HoldOn causes future plots to be overlayed. HoldOff make future plots replace previous.
 ```C#
 GnuPlot.HoldOn();
 GnuPlot.Plot("cos(x) + x");
 GnuPlot.Plot("cos(2*x)", "with points pt 3");
 ```
-Output
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/plotOverlay.png)
 
 
 Splot  (3D data)
