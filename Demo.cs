@@ -75,7 +75,12 @@ class Demo
 
         //Console.WriteLine("End of demo");
 
-        GnuPlot.Plot("sin(x) + 2");
+
+
+
+
+        //GnuPlot.Plot("sin(x) + 2");
+        GnuPlot.Plot("sin(x) + 2", "lc rgb \"magenta\" lw 5");
         Console.ReadKey();
 
     }

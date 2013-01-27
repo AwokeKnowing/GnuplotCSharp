@@ -34,15 +34,13 @@ Plot a function
 ```C#
 GnuPlot.Plot("sin(x) + 2");
 ```
-Output
-
-![Plot a function](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/plotf.png "Plot a function")
+![Plot a function](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/plotf.png)
 
 Plot a function with custom color and line width (see gnuplot documentation)
 ```C#
 GnuPlot.Plot("sin(x) + 2", "lc rgb \"magenta\" lw 5");
 ```
-Output
+![Plot a function](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/plotf2.png)
 
 Plot an array of y values
 ```C#
