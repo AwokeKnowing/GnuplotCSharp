@@ -9,6 +9,7 @@ namespace AwokeKnowing.GnuplotCSharp
 {
     class GnuPlot
     {
+        public static string PathToGnuplot= @"C:\gnuplot\bin";
         private static Process ExtPro;
         private static StreamWriter GnupStWr;
         private static List<StoredPlot> PlotBuffer;
@@ -19,9 +20,10 @@ namespace AwokeKnowing.GnuplotCSharp
 
         static GnuPlot()
         {
-            string Pgm = @"C:\gnuplot\bin\gnuplot.exe";
+            if (PathToGnuplot[PathToGnuplot.Length - 1].ToString() != @"\")
+                PathToGnuplot += @"\";
             ExtPro = new Process();
-            ExtPro.StartInfo.FileName = Pgm;
+            ExtPro.StartInfo.FileName = PathToGnuplot + "gnuplot.exe";
             ExtPro.StartInfo.UseShellExecute = false;
             ExtPro.StartInfo.RedirectStandardInput = true;
             ExtPro.Start();
