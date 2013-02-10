@@ -90,9 +90,11 @@ class Demo
         //double[] Y = new double[] { -4, 6.5, -2, 3, -8, -5, 11, 4, -5, 10 };
         //GnuPlot.Plot(X, Y);
 
-        GnuPlot.HoldOn();
-        GnuPlot.Plot("cos(x) + x");
-        GnuPlot.Plot("cos(2*x)", "with points pt 3");
+        //GnuPlot.HoldOn();
+        //GnuPlot.Plot("cos(x) + x");
+        //GnuPlot.Plot("cos(2*x)", "with points pt 3");
+
+        GnuPlot.SPlot("1 / (x*x + y*y + 1)");
 
         Console.ReadKey();
 

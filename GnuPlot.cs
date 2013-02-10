@@ -30,6 +30,7 @@ namespace AwokeKnowing.GnuplotCSharp
             GnupStWr = ExtPro.StandardInput;
             PlotBuffer = new List<StoredPlot>();
             SPlotBuffer = new List<StoredPlot>();
+            Hold = false;
         }
 
         public static void WriteLine(string gnuplotcommands)
@@ -191,7 +192,7 @@ namespace AwokeKnowing.GnuplotCSharp
         public static void SPlot(string filenameOrFunction, string options = "")
         {
             if (!Hold) SPlotBuffer.Clear();
-            SPlotBuffer.Add(new StoredPlot(filenameOrFunction, options));
+            SPlotBuffer.Add(new StoredPlot(filenameOrFunction, options,PlotTypes.SplotFileOrFunction));
             SPlot(SPlotBuffer);
         }
         public static void SPlot(int sizeY, double[] z, string options = "")
