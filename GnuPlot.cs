@@ -9,7 +9,7 @@ namespace AwokeKnowing.GnuplotCSharp
 {
     class GnuPlot
     {
-        public static string PathToGnuplot= @"C:\gnuplot\bin";
+        public static string PathToGnuplot = @"C:\Program Files (x86)\gnuplot\bin";
         private static Process ExtPro;
         private static StreamWriter GnupStWr;
         private static List<StoredPlot> PlotBuffer;
