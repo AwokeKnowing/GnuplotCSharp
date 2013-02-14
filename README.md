@@ -85,6 +85,7 @@ GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
 ![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splot1.png)
 -------
 <br>
+Set the number of lines with isosamples to control "detail" (see gnuplot documentation)
 ```C#
 GnuPlot.Set("isosamples 30");
 GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
@@ -92,6 +93,7 @@ GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
 ![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splot2.png)
 -------
 <br>
+Hide back faces with hidden3d to make it "solid" (see gnuplot documentation)
 ```C#
 GnuPlot.Set("isosamples 30", "hidden3d");
 GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
