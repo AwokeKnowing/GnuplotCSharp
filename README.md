@@ -102,10 +102,31 @@ GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
 -------
 <br><br>
 
-plot a file with 3D data
-```C#
+**plot a file with 3D data**
+__data.txt__  (this can be in any format accepted by gnuplot.  Here it's x,y,z points for two separate polygons)
+```
+-1 -1 -1
+-1 1 -1
+-.1 .1 1
+-.1 -.1 1
+-1 -1 -1
+
+
+.1 .1 1
+.1 -.1 1
+1 -1 -1
+1 1 -1
+.1 .1 1
 
 ```
+
+**to plot the above file**
+```C#
+splot ("data.txt");
+```
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splotfile.png)
+-------
+<br><br>
 
 plot an array of z values (specify y size to break the array into a square grid)
 ```C#

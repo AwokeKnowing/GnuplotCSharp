@@ -100,8 +100,10 @@ class Demo
         //GnuPlot.Set("isosamples 30");
         //GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
 
-        GnuPlot.Set("isosamples 30", "hidden3d");
-        GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
+        //GnuPlot.Set("isosamples 30", "hidden3d");
+        //GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
+
+        GnuPlot.SPlot("splotexampledata.txt");
 
         Console.ReadKey();
 
