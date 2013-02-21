@@ -103,7 +103,11 @@ class Demo
         //GnuPlot.Set("isosamples 30", "hidden3d");
         //GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
 
-        GnuPlot.SPlot("splotexampledata.txt");
+        //GnuPlot.SPlot("splotexampledata.txt");
+
+        double[] Z = new double[] { -4, -2.5, 1, 3,    -3, -2, 3, 4,    -1, 2, 6, 8 };
+        GnuPlot.Set("pm3d");
+        GnuPlot.SPlot(4, Z);
 
         Console.ReadKey();
 
