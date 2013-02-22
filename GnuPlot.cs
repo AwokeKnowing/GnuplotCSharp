@@ -334,9 +334,11 @@ namespace AwokeKnowing.GnuplotCSharp
                             plotstring += (splot + p.Function + defopts + p.Options);
                         break;
                     case PlotTypes.SplotXYZ:
-                    case PlotTypes.SplotZZ:
                     case PlotTypes.SplotZ:
                         plotstring += (splot + @"""-"" " + defopts + p.Options);
+                        break;
+                    case PlotTypes.SplotZZ:
+                        plotstring += (splot + @"""-"" matrix " + defopts + p.Options);
                         break;
                 }
                 if (i == 0) splot = ", ";

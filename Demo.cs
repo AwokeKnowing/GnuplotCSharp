@@ -105,9 +105,13 @@ class Demo
 
         //GnuPlot.SPlot("splotexampledata.txt");
 
-        double[] Z = new double[] { -4, -2.5, 1, 3,    -3, -2, 3, 4,    -1, 2, 6, 8 };
-        GnuPlot.Set("pm3d");
-        GnuPlot.SPlot(4, Z);
+        //double[] Z = new double[] { -4, -2.5, 1, 3,    -3, -2, 3, 4,    -1, 2, 6, 8 };
+        //GnuPlot.Set("pm3d");
+        //GnuPlot.SPlot(4, Z);
+
+        double[,] Z = new double[,] { {-4,-2.5,1,3},  {-3,-2,3,4},   {-1,2,6,8 } };
+        GnuPlot.Set("pm3d","palette gray");
+        GnuPlot.SPlot(Z,"with points pointtype 6");
 
         Console.ReadKey();
 

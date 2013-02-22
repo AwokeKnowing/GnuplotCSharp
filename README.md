@@ -128,7 +128,7 @@ splot ("data.txt");
 -------
 <br><br>
 
-plot an array of z values (specify y size to break the array into a square grid)
+**plot an array of z values** (specify y size to break the array into a square grid)
 ```C#
 double[] Z = new double[] { -4, -2.5, 1, 3,    -3, -2, 3, 4,    -1, 2, 6, 8 };
 GnuPlot.Set("pm3d"); //color planes by z value
@@ -140,8 +140,13 @@ GnuPlot.SPlot(4, Z); //split the 12 z values into rows of 4 points
 
 plot a grid of z values
 ```C#
-
+double[,] Z = new double[,] { {-4,-2.5,1,3},  {-3,-2,3,4},   {-1,2,6,8 } };
+GnuPlot.Set("pm3d","palette gray");      //we'll make monochrome color based on height of the plane
+GnuPlot.SPlot(Z,"with points pointtype 6"); //we'll try with points at vertexes instead of lines
 ```
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splotZZ.png)
+-------
+<br><br>
 
 plot a grid of x, y, and z values
 ```C#
