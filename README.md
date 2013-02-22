@@ -138,7 +138,7 @@ GnuPlot.SPlot(4, Z); //split the 12 z values into rows of 4 points
 -------
 <br><br>
 
-plot a grid of z values
+**plot a grid of z values** and use some styling (see gnuplot docs for style commands)
 ```C#
 double[,] Z = new double[,] { {-4,-2.5,1,3},  {-3,-2,3,4},   {-1,2,6,8 } };
 GnuPlot.Set("pm3d","palette gray");      //we'll make monochrome color based on height of the plane
