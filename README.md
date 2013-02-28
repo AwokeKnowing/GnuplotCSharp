@@ -166,7 +166,7 @@ GnuPlot.SPlot(Z,"with points pointtype 6"); //we'll try with points at vertexes 
 		GnuPlot.Set("xrange[-30:30]", "yrange[-30:30]", "zrange[-30:30]");
         GnuPlot.SPlot(X, Y, Z, "with points pointtype 8 lc rgb \"blue\"");
 ```
-![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splotxyz.png)
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splotxyz1.png)
 -------
 <br><br>
 
