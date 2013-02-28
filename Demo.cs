@@ -109,9 +109,24 @@ class Demo
         //GnuPlot.Set("pm3d");
         //GnuPlot.SPlot(4, Z);
 
-        double[,] Z = new double[,] { {-4,-2.5,1,3},  {-3,-2,3,4},   {-1,2,6,8 } };
-        GnuPlot.Set("pm3d","palette gray");
-        GnuPlot.SPlot(Z,"with points pointtype 6");
+        //double[,] Z = new double[,] { {-4,-2.5,1,3},  {-3,-2,3,4},   {-1,2,6,8 } };
+        //GnuPlot.Set("pm3d","palette gray");
+        //GnuPlot.SPlot(Z,"with points pointtype 6");
+
+        double[] X = new double[100];
+        double[] Y = new double[100];
+        double[] Z = new double[100];
+        Random r=new Random();
+        for (int i = 0; i < 100; i++)
+        {
+            X[i] = r.Next(30) - 15;
+            Y[i] = r.Next(50) - 25;
+            Z[i] = r.Next(20) - 10;
+        }
+
+        GnuPlot.Set("xrange[-30:30]", "yrange[-30:30]", "zrange[-30:30]");
+        GnuPlot.SPlot(X, Y, Z, "with points pointtype 8 lc rgb \"blue\"");
+        
 
         Console.ReadKey();
 

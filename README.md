@@ -148,10 +148,35 @@ GnuPlot.SPlot(Z,"with points pointtype 6"); //we'll try with points at vertexes 
 -------
 <br><br>
 
-plot a grid of x, y, and z values
+**plot a point cloud of x, y, and z values**
+```C#
+		//make some random data points
+		double[] X = new double[100];
+        double[] Y = new double[100];
+        double[] Z = new double[100];
+        Random r=new Random();
+        for (int i = 0; i < 100; i++)
+        {
+            X[i] = r.Next(30) - 15;
+            Y[i] = r.Next(50) - 25;
+            Z[i] = r.Next(20) - 10;
+        }
+
+        //set the range for the x,y,z axis and plot (using pointtype triangle and color blue)
+		GnuPlot.Set("xrange[-30:30]", "yrange[-30:30]", "zrange[-30:30]");
+        GnuPlot.SPlot(X, Y, Z, "with points pointtype 8 lc rgb \"blue\"");
+```
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splotxyz.png)
+-------
+<br><br>
+
+**plot a surface with unordered x, y, and z values**
 ```C#
 
 ```
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splotZZ.png)
+-------
+<br><br>
 
 
 Contour (3D data as "top view" with contour lines)
