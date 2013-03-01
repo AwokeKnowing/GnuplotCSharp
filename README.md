@@ -170,11 +170,28 @@ GnuPlot.SPlot(Z,"with points pointtype 6"); //we'll try with points at vertexes 
 -------
 <br><br>
 
-**plot a surface with unordered x, y, and z values**
+**plot a surface based on random unordered x, y, and z values**
 ```C#
+		//make 20 random data points
+		double[] X = new double[20];
+        double[] Y = new double[20];
+        double[] Z = new double[20];
+        Random r=new Random();
+        for (int i = 0; i < 20; i++)
+        {
+            X[i] = r.Next(30) - 15;
+            Y[i] = r.Next(50) - 25;
+            Z[i] = r.Next(20) - 10;
+        }
 
+        //fit the points to a surface grid of 40x40 with smoothing level 2
+		GnuPlot.Set("dgrid3d 40,40,2");
+		
+		//set the range for the x,y,z axis and plot (using pm3d to map height to color)
+        GnuPlot.Set("xrange[-30:30]", "yrange[-30:30]", "zrange[-30:30]");
+        GnuPlot.SPlot(X, Y, Z,"with pm3d");
 ```
-![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splotZZ.png)
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splotxyz2.png)
 -------
 <br><br>
 

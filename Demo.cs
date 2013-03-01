@@ -113,20 +113,36 @@ class Demo
         //GnuPlot.Set("pm3d","palette gray");
         //GnuPlot.SPlot(Z,"with points pointtype 6");
 
-        double[] X = new double[100];
-        double[] Y = new double[100];
-        double[] Z = new double[100];
-        Random r=new Random();
-        for (int i = 0; i < 100; i++)
+        //double[] X = new double[100];
+        //double[] Y = new double[100];
+        //double[] Z = new double[100];
+        //Random r=new Random();
+        //for (int i = 0; i < 100; i++)
+        //{
+        //    X[i] = r.Next(30) - 15;
+        //    Y[i] = r.Next(50) - 25;
+        //    Z[i] = r.Next(20) - 10;
+        //}
+
+        //GnuPlot.Set("xrange[-30:30]", "yrange[-30:30]", "zrange[-30:30]");
+        //GnuPlot.SPlot(X, Y, Z, "with points pointtype 8 lc rgb \"blue\"");
+
+
+        double[] X = new double[20];
+        double[] Y = new double[20];
+        double[] Z = new double[20];
+        Random r = new Random();
+        for (int i = 0; i < 20; i++)
         {
             X[i] = r.Next(30) - 15;
             Y[i] = r.Next(50) - 25;
-            Z[i] = r.Next(20) - 10;
+            Z[i] = r.Next(40) - 20;
         }
 
+
+        GnuPlot.Set("dgrid3d 40,40,2");
         GnuPlot.Set("xrange[-30:30]", "yrange[-30:30]", "zrange[-30:30]");
-        GnuPlot.SPlot(X, Y, Z, "with points pointtype 8 lc rgb \"blue\"");
-        
+        GnuPlot.SPlot(X, Y, Z,"with pm3d");
 
         Console.ReadKey();
 
