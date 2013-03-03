@@ -79,6 +79,14 @@ class Demo
 
 
 
+
+
+
+
+
+
+
+
         //GnuPlot.Plot("sin(x) + 2");
 
         //GnuPlot.Plot("sin(x) + 2", "lc rgb \"magenta\" lw 5");
@@ -128,21 +136,25 @@ class Demo
         //GnuPlot.SPlot(X, Y, Z, "with points pointtype 8 lc rgb \"blue\"");
 
 
-        double[] X = new double[20];
-        double[] Y = new double[20];
-        double[] Z = new double[20];
-        Random r = new Random();
-        for (int i = 0; i < 20; i++)
-        {
-            X[i] = r.Next(30) - 15;
-            Y[i] = r.Next(50) - 25;
-            Z[i] = r.Next(40) - 20;
-        }
+        //double[] X = new double[20];
+        //double[] Y = new double[20];
+        //double[] Z = new double[20];
+        //Random r = new Random();
+        //for (int i = 0; i < 20; i++)
+        //{
+        //    X[i] = r.Next(30) - 15;
+        //    Y[i] = r.Next(50) - 25;
+        //    Z[i] = r.Next(40) - 20;
+        //}
 
 
-        GnuPlot.Set("dgrid3d 40,40,2");
-        GnuPlot.Set("xrange[-30:30]", "yrange[-30:30]", "zrange[-30:30]");
-        GnuPlot.SPlot(X, Y, Z,"with pm3d");
+        //GnuPlot.Set("dgrid3d 40,40,2");
+        //GnuPlot.Set("xrange[-30:30]", "yrange[-30:30]", "zrange[-30:30]");
+        //GnuPlot.SPlot(X, Y, Z,"with pm3d");
+
+        GnuPlot.Unset("key");
+        GnuPlot.Set("cntrparam levels 20","isosamples 50", "xrange[-5:5]","yrange[-6:6]");
+        GnuPlot.Contour("sin(x) * cos(y)+x","lc rgb 'blue'");
 
         Console.ReadKey();
 

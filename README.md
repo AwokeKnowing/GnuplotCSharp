@@ -40,7 +40,7 @@ GnuPlot.Plot("sin(x) + 2");
 
 **Plot a function with custom color and line width** (see gnuplot documentation)
 ```C#
-GnuPlot.Plot("sin(x) + 2", "lc rgb \"magenta\" lw 5");
+GnuPlot.Plot("sin(x) + 2", "lc rgb 'magenta' lw 5");
 ```
 ![Plot a function](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/plotf2.png)
 -------
@@ -164,7 +164,7 @@ GnuPlot.SPlot(Z,"with points pointtype 6"); //we'll try with points at vertexes 
 
         //set the range for the x,y,z axis and plot (using pointtype triangle and color blue)
 		GnuPlot.Set("xrange[-30:30]", "yrange[-30:30]", "zrange[-30:30]");
-        GnuPlot.SPlot(X, Y, Z, "with points pointtype 8 lc rgb \"blue\"");
+        GnuPlot.SPlot(X, Y, Z, "with points pointtype 8 lc rgb 'blue'");
 ```
 ![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splotxyz1.png)
 -------
@@ -201,8 +201,14 @@ Contour (3D data as "top view" with contour lines)
 Contour maps are very useful to make it easier to see the peaks and valleys, and see what areas have the same range of values.  Gnuplot lets you show contour maps, but you can't draw 2d points and lines on them.  The Contour methods generate a 2D contour map, allowing you to plot further data points on it.
 
 ```C#
-
+GnuPlot.Unset("key");                                                               //hide the key or legend
+GnuPlot.Set("cntrparam levels 20","isosamples 50", "xrange[-5:5]","yrange[-6:6]");  //notice cntrparam levels(how many lines)
+GnuPlot.Contour("sin(x) * cos(y)+x","lc rgb 'blue'");                               //plot a 3d function (normally you'd use data)
 ```
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/contourfunc.png)
+-------
+<br><br>
+
 
 
 Heatmap  (intensity/z-scale map)
