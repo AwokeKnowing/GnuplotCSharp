@@ -201,9 +201,9 @@ Contour (3D data as "top view" with contour lines)
 Contour maps are very useful to make it easier to see the peaks and valleys, and see what areas have the same range of values.  Gnuplot lets you show contour maps, but you can't draw 2d points and lines on them.  The Contour methods generate a 2D contour map, allowing you to plot further data points on it.
 
 ```C#
-GnuPlot.Unset("key");                                                               //hide the key or legend
-GnuPlot.Set("cntrparam levels 20","isosamples 50", "xrange[-5:5]","yrange[-6:6]");  //notice cntrparam levels(how many lines)
-GnuPlot.Contour("sin(x) * cos(y)+x","lc rgb 'blue'");                               //plot a 3d function (normally you'd use data)
+GnuPlot.Unset("key");                                                      //hide the key or legend
+GnuPlot.Set("cntrparam levels 20","isosamples 50", "xr[-5:5]","yr[-6:6]"); //notice cntrparam levels (# height levels)
+GnuPlot.Contour("sin(x) * cos(y)+x","lc rgb 'blue'");                      //plot a 3d function (or data)
 ```
 ![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/contourfunc.png)
 -------

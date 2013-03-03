@@ -153,7 +153,7 @@ class Demo
         //GnuPlot.SPlot(X, Y, Z,"with pm3d");
 
         GnuPlot.Unset("key");
-        GnuPlot.Set("cntrparam levels 20","isosamples 50", "xrange[-5:5]","yrange[-6:6]");
+        GnuPlot.Set("cntrparam levels 20","isosamples 50", "xr[-5:5]","yr[-6:6]");
         GnuPlot.Contour("sin(x) * cos(y)+x","lc rgb 'blue'");
 
         Console.ReadKey();
