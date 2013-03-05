@@ -274,9 +274,11 @@ namespace AwokeKnowing.GnuplotCSharp
                             plotstring += (plot + p.Function + " with image " + p.Options);
                         break;
                     case PlotTypes.ColorMapXYZ:
-                    case PlotTypes.ColorMapZZ:
                     case PlotTypes.ColorMapZ:
                         plotstring += (plot + @"""-"" " + " with image " + p.Options);
+                        break;
+                    case PlotTypes.ColorMapZZ:
+                        plotstring += (plot + @"""-"" " + "matrix with image " + p.Options);
                         break;
                 }
                 if (i == 0) plot = ", ";
@@ -300,15 +302,16 @@ namespace AwokeKnowing.GnuplotCSharp
                         WriteData(p.X, p.Y, p.Z, GnupStWr, false);
                         GnupStWr.WriteLine("e");
                         break;
+                    case PlotTypes.ColorMapZ:
+                        WriteData(p.YSize, p.Z, GnupStWr, false);
+                        GnupStWr.WriteLine("e");
+                        break;
                     case PlotTypes.ColorMapZZ:
                         WriteData(p.ZZ, GnupStWr, false);
                         GnupStWr.WriteLine("e");
                         GnupStWr.WriteLine("e");
                         break;
-                    case PlotTypes.ColorMapZ:
-                        WriteData(p.YSize, p.Z, GnupStWr, false);
-                        GnupStWr.WriteLine("e");
-                        break;
+                    
                 }
             }
             GnupStWr.Flush();

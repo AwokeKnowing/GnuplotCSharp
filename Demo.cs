@@ -152,9 +152,21 @@ class Demo
         //GnuPlot.Set("xrange[-30:30]", "yrange[-30:30]", "zrange[-30:30]");
         //GnuPlot.SPlot(X, Y, Z,"with pm3d");
 
-        GnuPlot.Unset("key");
-        GnuPlot.Set("cntrparam levels 20","isosamples 50", "xr[-5:5]","yr[-6:6]");
-        GnuPlot.Contour("sin(x) * cos(y)+x","lc rgb 'blue'");
+        //GnuPlot.Unset("key");
+        //GnuPlot.Set("cntrparam levels 20","isosamples 50", "xr[-5:5]","yr[-6:6]");
+        //GnuPlot.Contour("sin(x) * cos(y)+x","lc rgb 'blue'");
+
+        double[,] Z = new double[,]{{0,0,0,1,2,2,1,0,0,0},
+                                    {0,0,2,3,3,3,3,2,0,0},
+                                    {0,2,3,4,4,4,4,3,2,0},
+                                    {2,3,4,5,5,5,5,4,3,2},
+                                    {3,4,5,6,7,7,6,5,4,3},
+                                    {3,4,5,6,7,7,6,5,4,3},
+                                    {2,3,4,5,5,5,5,4,3,2},
+                                    {0,2,3,4,4,4,4,3,2,0},
+                                    {0,0,2,3,3,3,3,2,0,0},
+                                    {0,0,0,1,2,2,1,0,0,0}};
+        GnuPlot.HeatMap(Z);
 
         Console.ReadKey();
 
