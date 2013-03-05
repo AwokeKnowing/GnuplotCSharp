@@ -227,6 +227,10 @@ double[,] Z = new double[,]{{0,0,0,1,2,2,1,0,0,0},
                             {0,0,0,1,2,2,1,0,0,0}};
 GnuPlot.HeatMap(Z);							
 ```
+![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/heatmap.png)
+-------
+<br><br>
+
 
 Set and Unset
 --------
