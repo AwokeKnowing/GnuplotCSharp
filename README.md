@@ -310,3 +310,6 @@ Disclaimer
 Use this code at your own risk.  The author cannot guarantee that it is free of defects or that it will not damage your system or corrupt your data.  It's less than 1000 lines of code, so just look at it, and decide if it works for you.
 
 Happy coding!!
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/AwokeKnowing/gnuplotcsharp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
