@@ -84,7 +84,8 @@ GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
 ```
 ![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splot1.png)
 -------
-<br>
+<br><br>
+
 Set the number of lines with **isosamples** to control "detail" (see gnuplot documentation)
 ```C#
 GnuPlot.Set("isosamples 30");
@@ -92,7 +93,8 @@ GnuPlot.SPlot("1 / (.05*x*x + .05*y*y + 1)");
 ```
 ![Plot data](https://raw.github.com/AwokeKnowing/GnuplotCSharp/master/ReadmeImages/splot2.png)
 -------
-<br>
+<br><br>
+
 Hide back faces with **hidden3d** to make it "solid" (see gnuplot documentation)
 ```C#
 GnuPlot.Set("isosamples 30", "hidden3d");
@@ -310,5 +312,5 @@ Disclaimer
 Use this code at your own risk.  The author cannot guarantee that it is free of defects or that it will work as you expect.  It's less than 1000 lines of code, so just look at it, and decide if it works for you.
 
 Happy coding!!
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/AwokeKnowing/gnuplotcsharp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 
