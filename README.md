@@ -238,8 +238,15 @@ Set and Unset
 --------
 
 ```C#
-
+GnuPlot.HoldOn();
+GnuPlot.Set("title 'Phase-Locked Signals'");
+GnuPlot.Set("samples 2000");
+GnuPlot.Unset("key");
+GnuPlot.Plot("sin(x)");
+GnuPlot.Plot("cos(x)");
 ```
+
+![Set and Unset](/ReadmeImages/phase.png)
 
 Replot
 --------
