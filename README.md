@@ -1,6 +1,8 @@
 Gnuplot.C#
 ========
 
+The GnuplotCSharp project makes it easy to use gnuplot in C# applications by adding a single file ([GnuPlot.cs](GnuPlot.cs)) to your existing Visual Studio project.
+
 Overview
 --------
 Most scientific publications with graphs use gnuplot.  It is extremely well documented and handles 2D, 3D (surface and pointcloud), heatmap, png, jpg, and much more using simple math syntax as well as simple text-based data.  And it supports many output formats, as well interactive zooming/rotating.
