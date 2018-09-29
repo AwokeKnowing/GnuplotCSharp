@@ -312,10 +312,6 @@ Write
 
 Replot
 
-License
--------
-You are free to use this code as you wish.  Please mention you got it on GitHub from James Morris aka AwokeKnowing. Also, email me at james david morris a/t g mail .com (no spaces) and let me know about your project.
-
 Disclaimer
 ----------
 Use this code at your own risk.  The author cannot guarantee that it is free of defects or that it will work as you expect.  It's less than 1000 lines of code, so just look at it, and decide if it works for you.
