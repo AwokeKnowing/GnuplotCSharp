@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Linq;
+using System.Globalization;
 
 namespace AwokeKnowing.GnuplotCSharp
 {
@@ -374,7 +375,7 @@ namespace AwokeKnowing.GnuplotCSharp
         public static void WriteData(double[] y, StreamWriter stream, bool flush = true)
         {
             for (int i = 0; i < y.Length; i++)
-                stream.WriteLine(y[i].ToString());
+                stream.WriteLine(y[i].ToString(CultureInfo.InvariantCulture));
 
             if (flush) stream.Flush();
         }
@@ -382,7 +383,7 @@ namespace AwokeKnowing.GnuplotCSharp
         public static void WriteData(double[] x, double[] y, StreamWriter stream, bool flush = true)
         {
             for (int i = 0; i < y.Length; i++)
-                stream.WriteLine(x[i].ToString() + " " + y[i].ToString());
+                stream.WriteLine(x[i].ToString(CultureInfo.InvariantCulture) + " " + y[i].ToString(CultureInfo.InvariantCulture));
 
             if (flush) stream.Flush();
         }
@@ -393,7 +394,7 @@ namespace AwokeKnowing.GnuplotCSharp
             {
                 if (i > 0 && i % ySize == 0)
                     stream.WriteLine();
-                stream.WriteLine(z[i].ToString());
+                stream.WriteLine(z[i].ToString(CultureInfo.InvariantCulture));
             }
 
             if (flush) stream.Flush();
@@ -408,7 +409,7 @@ namespace AwokeKnowing.GnuplotCSharp
             {
                 line = "";
                 for (int j = 0; j < n; j++)
-                    line += zz[i, j].ToString() + " ";
+                    line += zz[i, j].ToString(CultureInfo.InvariantCulture) + " ";
                 stream.WriteLine(line.TrimEnd());
             }
 
@@ -423,7 +424,8 @@ namespace AwokeKnowing.GnuplotCSharp
             {
                 if (i > 0 && x[i] != x[i - 1])
                     stream.WriteLine("");
-                stream.WriteLine(x[i] + " " + y[i] + " " + z[i]);
+
+                stream.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1} {2}", x[i], y[i], z[i]));
             }
 
             if (flush) stream.Flush();
