@@ -7,7 +7,7 @@ Note: gnuplot executable must be available on the system, or can be included in 
 
 Overview
 --------
-Most scientific publications with graphs use gnuplot.  It is extremely well documented and handles 2D, 3D (surface and pointcloud), heatmap, png, jpg, and much more using simple math syntax as well as simple text-based data.  And it supports many output formats, as well interactive zooming/rotating.
+Many popular scientific publications with graphs use gnuplot.  It is extremely well documented and handles 2D, 3D (surface and pointcloud), heatmap, png, jpg, and much more using simple math syntax as well as simple text-based data.  And it supports many output formats, as well interactive zooming/rotating.
 
 It only takes about 10 lines of code to wire up C# to send commands to gnuplot.  But as soon as you try to send arrays of data, overlay multiple graphs, and generally work with gnuplot from C#, you'll immediately see that you have to add all kinds of utility functions to not clutter up your code.
 
