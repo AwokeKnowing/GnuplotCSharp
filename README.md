@@ -1,6 +1,8 @@
 Gnuplot.C#
 ========
 
+**The GnuplotCSharp project makes it easy to use gnuplot in C# applications by adding a single file ([GnuPlot.cs](GnuPlot.cs)) to your existing Visual Studio project. (gnuplot must be available on the system, or can be included in your project)** Gnuplot has a [richly documented set of commands](http://gnuplot.sourceforge.net/demo/), and this project brings these advanced graphing capabilities into the C# / Visual Studio programming environment.
+
 Overview
 --------
 Most scientific publications with graphs use gnuplot.  It is extremely well documented and handles 2D, 3D (surface and pointcloud), heatmap, png, jpg, and much more using simple math syntax as well as simple text-based data.  And it supports many output formats, as well interactive zooming/rotating.
@@ -238,8 +240,15 @@ Set and Unset
 --------
 
 ```C#
-
+GnuPlot.HoldOn();
+GnuPlot.Set("title 'Phase-Locked Signals'");
+GnuPlot.Set("samples 2000");
+GnuPlot.Unset("key");
+GnuPlot.Plot("sin(x)");
+GnuPlot.Plot("cos(x)");
 ```
+
+![Set and Unset](/ReadmeImages/phase.png)
 
 Replot
 --------
@@ -302,10 +311,6 @@ WriteLine
 Write
 
 Replot
-
-License
--------
-You are free to use this code as you wish.  Please mention you got it on GitHub from James Morris aka AwokeKnowing. Also, email me at james david morris a/t g mail .com (no spaces) and let me know about your project.
 
 Disclaimer
 ----------
