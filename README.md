@@ -1,7 +1,9 @@
 Gnuplot.C#
 ========
 
-**The GnuplotCSharp project makes it easy to use gnuplot in C# applications by adding a single file ([GnuPlot.cs](GnuPlot.cs)) to your existing Visual Studio project.** (gnuplot must be available on the system, or can be included in your project) Gnuplot has a [richly documented set of commands](http://gnuplot.sourceforge.net/demo/), and this project brings these advanced graphing capabilities into the C# / Visual Studio programming environment.
+**The GnuplotCSharp project makes it easy to use gnuplot in C# applications by adding a single file ([GnuPlot.cs](GnuPlot.cs)) to your existing Visual Studio project.**  Gnuplot has a [richly documented set of commands](http://gnuplot.sourceforge.net/demo/), and this project brings these advanced graphing capabilities into the C# / Visual Studio programming environment. 
+
+Note: gnuplot executable must be available on the system, or can be included in your project.
 
 Overview
 --------
