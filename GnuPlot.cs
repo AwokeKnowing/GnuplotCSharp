@@ -9,7 +9,8 @@ namespace AwokeKnowing.GnuplotCSharp
 {
     class GnuPlot
     {
-        public static string PathToGnuplot = @"C:\Program Files (x86)\gnuplot\bin";
+        public static string PathToGnuplot = @"C:\Program Files\gnuplot\bin";// Change to relevant folder
+        public static string PathToPlot = @"C:\Users\brand\Data\Plots"; // Change to relevant folder
         private static Process ExtPro;
         private static StreamWriter GnupStWr;
         private static List<StoredPlot> PlotBuffer;
@@ -112,10 +113,10 @@ namespace AwokeKnowing.GnuplotCSharp
                 Plot(PlotBuffer);
         }
 
-        public static void Plot(string filenameOrFunction, string options = "")
+        public static void Plot(string filenameOrFunction, string options = "", string preoption = "")
         {
             if (!Hold) PlotBuffer.Clear();
-            PlotBuffer.Add(new StoredPlot(filenameOrFunction, options));
+            PlotBuffer.Add(new StoredPlot(filenameOrFunction, options, preoption));
             Plot(PlotBuffer);
         }
         public static void Plot(double[] y, string options = "")
@@ -134,7 +135,7 @@ namespace AwokeKnowing.GnuplotCSharp
         public static void Contour(string filenameOrFunction, string options = "", bool labelContours = true)
         {
             if (!Hold) PlotBuffer.Clear();
-            var p = new StoredPlot(filenameOrFunction, options, PlotTypes.ContourFileOrFunction);
+            var p = new StoredPlot(filenameOrFunction, options, plotType: PlotTypes.ContourFileOrFunction);
             p.LabelContours = labelContours;
             PlotBuffer.Add(p);
             Plot(PlotBuffer);
@@ -167,7 +168,7 @@ namespace AwokeKnowing.GnuplotCSharp
         public static void HeatMap(string filenameOrFunction, string options = "")
         {
             if (!Hold) PlotBuffer.Clear();
-            PlotBuffer.Add(new StoredPlot(filenameOrFunction, options, PlotTypes.ColorMapFileOrFunction));
+            PlotBuffer.Add(new StoredPlot(filenameOrFunction, options, plotType: PlotTypes.ColorMapFileOrFunction));
             Plot(PlotBuffer);
         }
         public static void HeatMap(int sizeY, double[] intensity, string options = "")
@@ -192,7 +193,7 @@ namespace AwokeKnowing.GnuplotCSharp
         public static void SPlot(string filenameOrFunction, string options = "")
         {
             if (!Hold) SPlotBuffer.Clear();
-            SPlotBuffer.Add(new StoredPlot(filenameOrFunction, options,PlotTypes.SplotFileOrFunction));
+            SPlotBuffer.Add(new StoredPlot(filenameOrFunction, options, plotType: PlotTypes.SplotFileOrFunction));
             SPlot(SPlotBuffer);
         }
         public static void SPlot(int sizeY, double[] z, string options = "")
@@ -233,7 +234,7 @@ namespace AwokeKnowing.GnuplotCSharp
                 {
                     case PlotTypes.PlotFileOrFunction:
                         if (p.File != null)
-                            plotstring += (plot + plotPath(p.File) + " " + p.Options);
+                            plotstring += (plot + p.PreOptions + plotPath(p.File) + " " + p.Options);
                         else
                             plotstring += (plot + p.Function + " " + p.Options);
                         break;
@@ -311,7 +312,7 @@ namespace AwokeKnowing.GnuplotCSharp
                         GnupStWr.WriteLine("e");
                         GnupStWr.WriteLine("e");
                         break;
-                    
+
                 }
             }
             GnupStWr.Flush();
@@ -620,13 +621,15 @@ namespace AwokeKnowing.GnuplotCSharp
         public double[,] ZZ;
         public int YSize;
         public string Options;
+        public string PreOptions;
         public PlotTypes PlotType;
         public bool LabelContours;
+
 
         public StoredPlot()
         {
         }
-        public StoredPlot(string functionOrfilename, string options = "", PlotTypes plotType = PlotTypes.PlotFileOrFunction)
+        public StoredPlot(string functionOrfilename, string options = "", string preptions = "", PlotTypes plotType = PlotTypes.PlotFileOrFunction)
         {
             if (IsFile(functionOrfilename))
                 File = functionOrfilename;
@@ -634,6 +637,8 @@ namespace AwokeKnowing.GnuplotCSharp
                 Function = functionOrfilename;
             Options = options;
             PlotType = plotType;
+            if (preptions.Length > 1) { PreOptions = preptions + " "; }
+            else PreOptions = preptions;
         }
 
         public StoredPlot(double[] y, string options = "")
@@ -690,8 +695,150 @@ namespace AwokeKnowing.GnuplotCSharp
                 return true;
             return false;
         }
-
     }
 
+    class EzPlot : GnuPlot
+    {
+        public static void Bar<T>(string title, string option = "", params T[][] InputArrays)
+        {
+            string FilePath = PathToPlot + string.Format(@"\{0}.dat", title);
+            int[] Colors = new int[InputArrays.Length];
+            int itter = 0;
+            int Color = 0;
+            Dictionary<T, int> ValuePairs = new Dictionary<T, int>();
+            foreach (T[] arr in InputArrays)
+            {
+                Colors[itter] = Color;
+                foreach (T item in arr)
+                {
+                    if (ValuePairs.ContainsKey(item)) { ValuePairs[item]++; }
+                    else { ValuePairs.Add(item, 1); Color++; }
+                }
+                itter++;
+            }
+            CreateDAT<T>(FilePath, ValuePairs, Colors);
 
+            if (option.Length > 1) { GnuPlot.Plot(FilePath, option); }
+            else GnuPlot.Plot(FilePath, string.Format("using 0:2:3:xtic(1) with boxes lc variable title '{0}'", title));
+        }
+
+        public static void Box(string title, string[] colNames, string option = "", params double[][] InputArrays)
+        {
+            string FilePath = PathToPlot + string.Format(@"\{0}.dat", title);
+            CreateDAT<double>(FilePath, colNames, InputArrays);
+
+            double minVal = InputArrays[0][0];
+            double maxVal = InputArrays[0][0];
+
+            foreach (double[] arr in InputArrays)
+            {
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (arr[i] < minVal) { minVal = arr[i]; }
+                    else if (arr[i] > maxVal) { maxVal = arr[i]; }
+                }
+            }
+
+            string colString = "";
+            for (int i = 0; i < colNames.Length; i++)
+            {
+                colString += string.Format("\"{0}\" {1}", colNames[i], i + 1);
+                if (i < colNames.Length - 1) { colString += ", "; }
+            }
+
+            GnuPlot.Set("style fill solid 0.5 border -1", "style boxplot outliers pointtype 7");
+            GnuPlot.Set("style data boxplot");
+            GnuPlot.Set("boxwidth  0.5", "pointsize 0.5");
+            GnuPlot.Unset("key");
+            GnuPlot.Set(string.Format("yrange [{0}:{1}]", minVal - (1 * Math.Max(minVal, 1)), maxVal + (1 * Math.Max(minVal, 1))));
+            GnuPlot.Set(string.Format("xtics ({0})", colString));
+
+            if (option.Length > 1) { GnuPlot.Plot(FilePath, option); }
+            else GnuPlot.Plot(FilePath, options: "using (i):i", preoption: string.Format("for [i=1:{0}] ", colNames.Length));
+        }
+
+        public static void Box(string title, string[] colNames, string option = "", params int[][] InputArrays)
+        {
+            string FilePath = PathToPlot + string.Format(@"\{0}.dat", title);
+            CreateDAT<int>(FilePath, colNames, InputArrays);
+            int minVal = InputArrays[0][0];
+            int maxVal = InputArrays[0][0];
+
+            foreach (int[] arr in InputArrays)
+            {
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (arr[i] < minVal) { minVal = arr[i]; }
+                    else if (arr[i] > maxVal) { maxVal = arr[i]; }
+                }
+            }
+
+            string colString = "";
+            for (int i = 0; i < colNames.Length; i++)
+            {
+                colString += string.Format("\"{0}\" {1}", colNames[i], i + 1);
+                if (i < colNames.Length - 1) { colString += ", "; }
+            }
+
+            GnuPlot.Set("style fill solid 0.5 border -1", "style boxplot outliers pointtype 7");
+            GnuPlot.Set("style data boxplot");
+            GnuPlot.Set("boxwidth  0.5", "pointsize 0.5");
+            GnuPlot.Unset("key");
+            GnuPlot.Set(string.Format("yrange [{0}:{1}]", minVal - 1, maxVal + 1));
+            GnuPlot.Set(string.Format("xtics ({0})", colString));
+
+
+            if (option.Length > 1) { GnuPlot.Plot(FilePath, option); }
+            else GnuPlot.Plot(FilePath, options: "using (i):i", preoption: string.Format("for [i=1:{0}] ", colNames.Length));
+        }
+
+
+        public static void CreateDAT<T>(string filename, Dictionary<T, int> ValuePairs, int[] Colors)
+        {
+            StreamWriter sw = new StreamWriter(filename);
+            string output = "#\tValues\tCounts\tColors\n";
+            sw.Write(output);
+
+            T[] Values = new T[ValuePairs.Count];
+            int[] Counts = new int[ValuePairs.Count];
+            ValuePairs.Keys.CopyTo(Values, 0);
+            ValuePairs.Values.CopyTo(Counts, 0);
+            int Color = 0;
+
+            for (int i = 0; i < Values.Length; i++)
+            {
+                for (int j = 0; j < Colors.Length; j++)
+                {
+                    if (i == Colors[j]) { Color++; }
+                }
+                sw.WriteLine("\"{0}\"\t{1}\t{2}", Values[i], Counts[i], Color);
+            }
+
+            sw.Close();
+        }
+
+        public static void CreateDAT<T>(string filename, string[] colNames, params T[][] cols)
+        {
+
+            StreamWriter sw = new StreamWriter(filename);
+
+            string output = @"#";
+            foreach (string s in colNames)
+            {
+                output += "\t" + s;
+            }
+            sw.Write(output + "\n");
+
+            for (int i = 0; i < cols[0].Length; i++)
+            {
+                output = "";
+                foreach (T[] arr in cols)
+                {
+                    output += arr[i].ToString() + "\t";
+                }
+                sw.WriteLine(output);
+            }
+            sw.Close();
+        }
+    }
 }
