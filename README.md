@@ -258,12 +258,23 @@ Replot
 ```C#
 
 ```
+GnuPlot.HoldOn();
+GnuPlot.Plot("sin(x)");
+GnuPlot.Plot("cos(x)");
+// Replot the current buffer with updated settings
+GnuPlot.Set("key top");
+GnuPlot.Replot();
+```
 
 Write and WriteLine
 --------
 
 ```C#
 
+```
+// Send raw gnuplot commands directly
+GnuPlot.Write("set title 'Custom Title'");
+GnuPlot.WriteLine("plot sin(x)");
 ```
 
 SaveData
@@ -272,12 +283,21 @@ SaveData
 ```C#
 
 ```
+double[] X = new double[] { 1, 2, 3, 4 };
+double[] Y = new double[] { 1, 4, 9, 16 };
+GnuPlot.SaveData(X, Y, "squared.dat");
+GnuPlot.Plot("squared.dat", "with linespoints");
+```
 
 PointStyles
 --------
 
 ```C#
 
+```
+double[] X = new double[] { 1, 2, 3 };
+double[] Y = new double[] { 1, 4, 9 };
+GnuPlot.Plot(X, Y, "with points pt " + (int)PointStyles.SolidDiamond);
 ```
 
 StoredPlot  
@@ -286,6 +306,14 @@ StoredPlot
 ```C#
 
 
+```
+// Useful for batching plots
+var plots = new List<StoredPlot>
+{
+    new StoredPlot("sin(x)", "title 'Sine'"),
+    new StoredPlot("cos(x)", "title 'Cosine' lc rgb 'red'")
+};
+GnuPlot.Plot(plots);
 ```
 
 API Reference
